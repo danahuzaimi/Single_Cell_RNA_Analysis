@@ -1,0 +1,33 @@
+```r
+# Retrive the cell identity 
+head(Idents(object = m))
+# The table shows there are 10 clusters (0 - 9) Numbers represent the number of cells in each cluster. 
+table(Idents(m))
+
+
+Idents(m) = 'Treatment'
+# The table shows number of cells for each treatment group. 
+table(Idents(m))
+
+# To find the number of clusters 
+cluster_ids <- Idents(m)
+number_of_clusters <- length(unique(cluster_ids))
+
+cat("Number of clusters:", number_of_clusters)
+
+head(m$seurat_clusters)
+#FindAllMarkers(m)
+
+table(m@meta.data$seurat_clusters, m@meta.data$Treatment)
+
+# Only positive markers are considered 
+# 0.25 is the min percentage threshold for a marker to be considered
+# Select top 2 markers with the highest avg_Log2FC from each cluster 
+m.markers <- FindAllMarkers(m, only.pos = TRUE, min.pct = 0.25,logfc.threshold = 0.25)
+m.markers %>% group_by(cluster) %>% slice_max( n = 2, order_by = avg_log2FC) 
+
+# Find all markers that distinguish cluster 0 from cluster 8
+#cluster0markers = FindMarkers(m, ident.1 = 0, ident.2 = 8 , min.pct = 0.25)
+#head(cluster0markers, n = 3)
+# pct.1 and pct.2 represent the percentage of cells expressing a particular gene within two clusters being compared.
+```

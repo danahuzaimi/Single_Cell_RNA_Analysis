@@ -132,3 +132,26 @@ DoHeatmap(m, features = row_indices, size = 3)
 dev.off()
 
 ```
+```r
+# Task: Group cells based on cell type x donor to know the percentage of each cells from each donor 
+# Make a table 
+cells_dt <- table(m@meta.data$Donor, m@meta.data$Automated_cell_type_annotation_complete)
+# Find the proportion of each cell type per row 
+cells_d <- prop.table(cells_dt, 1)*100
+# add sum to the table and show percentage 
+addmargins(cells_d)
+
+# Another way
+# find sum of all cells 
+total_cell <- sum(cells_dt)
+
+# Divide each element in the table by total * 100 
+per_cell <- (cells_dt/total_cell) * 100
+
+# Convert table to df 
+per_cell <- data.frame(rbind(per_cell))
+
+# add sum
+# Percentage of cells from each donor. total is 100
+row1 <- print(rowSums(per_cell))
+```

@@ -13,3 +13,5 @@ RColorBrewer
 tidyr    
 scCustomize    
 pheatmap   
+UpSetR
+stringr

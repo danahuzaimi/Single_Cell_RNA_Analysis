@@ -1,0 +1,45 @@
+```{r}
+# Create a volcano plot
+
+# Assign color of each point based on avg_log2FC and significance
+colors_points <- function(log2FC, p_value) {
+ 
+  # Changed the significant value to 1x10^(-100) to only visualize genes that are highly significant on the plot 
+  significant <- -log10(1e-100) 
+  if(p_value < significant) 
+    {return("gray")} 
+  else 
+    if(log2FC < 0) {return("blue")} # Down
+  else {return("red")} # Up
+}
+
+# Determine colors for each point in the dataset
+DE_Treatment$colors <- mapply(colors_points, DE_Treatment$avg_log2FC, -log10(DE_Treatment$p_val_adj))
+
+# Identify genes to label: genes with colors either blue or red
+genes_label <- DE_Treatment[DE_Treatment$colors %in% c("blue", "red"), ]
+genes_label
+
+# Plot
+volcano_plot <- ggplot(DE_Treatment, aes(x = avg_log2FC, y = -log10(p_val), color = colors)) +  # Use the 'colors' column for the color aesthetic
+  geom_point(alpha = 0.5) + 
+  scale_color_identity() +  #  tells ggplot to use the colors we've specified directly
+  scale_color_manual(name = "Expression",
+                     values = c("gray" = "gray", "blue" = "blue", "red" = "red"),
+                     breaks = c("blue", "red", "gray"),
+                     labels = c("Down", "Up", "Not Significant")) +
+  labs(
+    title = "Volcano Plot of Differentially Expressed Genes Between Treatment Groups",
+    x = "avg_log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme(legend.position = "right") + 
+  theme_bw(9) +  
+  geom_hline(yintercept = -log10(1e-100), linetype = "dashed", color = "black") +  
+  geom_vline(xintercept = 0 , linetype = "dashed", color = "black") + 
+  geom_text(data = genes_label, aes(label = rownames(genes_label)), vjust = -1, hjust = 1, size = 2)
+
+
+#Show the plot 
+volcano_plot
+```

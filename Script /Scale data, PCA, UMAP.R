@@ -78,4 +78,3 @@ for (a in annCols) {
   dev.off()
 }
 # elbow" point in the plot is where variance starts to level off. This indicates the optimal number of PCs to use for dimensionality reduction.
-```

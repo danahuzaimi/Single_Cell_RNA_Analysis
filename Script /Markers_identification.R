@@ -1,4 +1,3 @@
-```r
 # Retrive the cell identity 
 head(Idents(object = m))
 # The table shows there are 10 clusters (0 - 9) Numbers represent the number of cells in each cluster. 
@@ -154,4 +153,3 @@ per_cell <- data.frame(rbind(per_cell))
 # add sum
 # Percentage of cells from each donor. total is 100
 row1 <- print(rowSums(per_cell))
-```

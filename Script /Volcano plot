@@ -1,4 +1,3 @@
-```{r}
 # Create a volcano plot
 
 # Assign color of each point based on avg_log2FC and significance
@@ -42,4 +41,3 @@ volcano_plot <- ggplot(DE_Treatment, aes(x = avg_log2FC, y = -log10(p_val), colo
 
 #Show the plot 
 volcano_plot
-```

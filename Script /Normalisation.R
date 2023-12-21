@@ -1,4 +1,3 @@
-```{r}
 # Normalise data to account for differences in sequencing depth between cells 
 m <- NormalizeData(m)
 
@@ -26,4 +25,3 @@ png(
 )
 plot2
 dev.off()
-```

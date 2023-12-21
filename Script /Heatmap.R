@@ -1,4 +1,3 @@
-
 # Heatmap of Percentage of cells per cell type based on expression of Gene1 and Gene2 
 # Calculates the percent of cells that express a given set of features by various grouping factors
 #install.packages("scCustomize")

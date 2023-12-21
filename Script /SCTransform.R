@@ -1,4 +1,3 @@
-```r
 library(sctransform)
 
 m <- SCTransform(
@@ -35,4 +34,3 @@ png(
 )
 print(plot2)
 dev.off()
-```

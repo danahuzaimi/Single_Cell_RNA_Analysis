@@ -1,4 +1,3 @@
-```{r}
 # Shows the slots in seurat obj
 str(m)
 
@@ -14,4 +13,3 @@ dim(m@assays$RNA@counts)
 # To see cells types in each sample 
 table(m@meta.data$Automated_cell_type_annotation_complete, m@meta.data$Sample_name)
 table(m@meta.data$Automated_cell_type_annotation_complete, m@meta.data$Treatment)
-```
